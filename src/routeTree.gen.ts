@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as EntdeckenRouteImport } from './routes/entdecken'
 import { Route as StartRouteImport } from './routes/start'
+import { Route as AuthenticatedDeployRouteImport } from './routes/_authenticated/deploy'
 import { Route as AuthenticatedDeveloperRouteImport } from './routes/_authenticated/developer'
 import { Route as AuthenticatedPartnerRouteImport } from './routes/_authenticated/partner'
 
@@ -41,6 +42,11 @@ const StartRoute = StartRouteImport.update({
   path: '/start',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDeployRoute = AuthenticatedDeployRouteImport.update({
+  id: '/deploy',
+  path: '/deploy',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDeveloperRoute = AuthenticatedDeveloperRouteImport.update({
   id: '/developer',
   path: '/developer',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/deploy': typeof AuthenticatedDeployRoute
   '/developer': typeof AuthenticatedDeveloperRoute
   '/partner': typeof AuthenticatedPartnerRoute
 }
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/deploy': typeof AuthenticatedDeployRoute
   '/developer': typeof AuthenticatedDeveloperRoute
   '/partner': typeof AuthenticatedPartnerRoute
 }
@@ -75,14 +83,29 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/_authenticated/deploy': typeof AuthenticatedDeployRoute
   '/_authenticated/developer': typeof AuthenticatedDeveloperRoute
   '/_authenticated/partner': typeof AuthenticatedPartnerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/entdecken' | '/start' | '/developer' | '/partner'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/entdecken'
+    | '/start'
+    | '/deploy'
+    | '/developer'
+    | '/partner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/entdecken' | '/start' | '/developer' | '/partner'
+  to:
+    | '/'
+    | '/auth'
+    | '/entdecken'
+    | '/start'
+    | '/deploy'
+    | '/developer'
+    | '/partner'
   id:
     | '__root__'
     | '/'
@@ -90,6 +113,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/entdecken'
     | '/start'
+    | '/_authenticated/deploy'
     | '/_authenticated/developer'
     | '/_authenticated/partner'
   fileRoutesById: FileRoutesById
@@ -139,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/deploy': {
+      id: '/_authenticated/deploy'
+      path: '/deploy'
+      fullPath: '/deploy'
+      preLoaderRoute: typeof AuthenticatedDeployRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/developer': {
       id: '/_authenticated/developer'
       path: '/developer'
@@ -157,11 +188,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDeployRoute: typeof AuthenticatedDeployRoute
   AuthenticatedDeveloperRoute: typeof AuthenticatedDeveloperRoute
   AuthenticatedPartnerRoute: typeof AuthenticatedPartnerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDeployRoute: AuthenticatedDeployRoute,
   AuthenticatedDeveloperRoute: AuthenticatedDeveloperRoute,
   AuthenticatedPartnerRoute: AuthenticatedPartnerRoute,
 }
