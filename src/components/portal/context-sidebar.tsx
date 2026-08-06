@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 
 export function ContextSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const section = navSections.find((s) => pathname.startsWith(s.to)) ?? navSections[0];
+  const section = navSections.find((s) => pathname.startsWith(s.to)) ?? navSections[0]!;
+
 
   return (
     <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar lg:block">
