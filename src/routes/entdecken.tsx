@@ -72,7 +72,7 @@ function DiscoverPage() {
       return (
         item.name.toLowerCase().includes(needle) ||
         (item.description ?? "").toLowerCase().includes(needle) ||
-        (item.stack ?? []).some((s: string) => s.toLowerCase().includes(needle))
+        (item.tech_stack ?? []).some((s: string) => s.toLowerCase().includes(needle))
       );
     });
   }, [data, query, category, verifiedOnly]);
@@ -146,7 +146,7 @@ function DiscoverPage() {
                   </div>
 
                   <div className="mt-3 flex flex-wrap items-center gap-1.5">
-                    {(item.stack ?? []).slice(0, 4).map((s: string) => (
+                    {(item.tech_stack ?? []).slice(0, 4).map((s: string) => (
                       <span
                         key={s}
                         className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[10px] text-secondary-foreground"
