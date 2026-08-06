@@ -158,8 +158,9 @@ function DiscoverPage() {
                       </span>
                     ))}
                     <span className="ml-auto inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
-                      <Star className="h-3 w-3" /> {item.stars}
+                      <Star className="h-3 w-3" /> {item.vendor ?? "community"}
                     </span>
+
                   </div>
 
                   {item.install_command ? (
