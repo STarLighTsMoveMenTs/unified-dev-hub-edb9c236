@@ -51,8 +51,11 @@ function DiscoverPage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("catalog_items")
-        .select("id, slug, name, description, category, kind, stack, verified, stars, install_command")
-        .order("stars", { ascending: false });
+        .select(
+          "id, slug, name, description, category, kind, tech_stack, verified, vendor, install_command",
+        )
+        .order("name");
+
       if (error) throw error;
       return data;
     },
