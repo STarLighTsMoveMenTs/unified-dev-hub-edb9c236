@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Search, ShieldCheck, ChevronDown, LogOut, User as UserIcon, Activity } from "lucide-react";
+import {
+  Search,
+  ShieldCheck,
+  ChevronDown,
+  LogOut,
+  User as UserIcon,
+  Activity,
+  Sparkles,
+  Network,
+} from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
