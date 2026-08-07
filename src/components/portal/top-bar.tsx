@@ -31,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-session";
 import { navSections } from "./nav-config";
+import { useMotionLevel, motionLabels } from "@/hooks/use-motion-level";
 import { cn } from "@/lib/utils";
 
 export function TopBar() {
@@ -38,6 +39,7 @@ export function TopBar() {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { user } = useSession();
+  const { level, cycle } = useMotionLevel();
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
