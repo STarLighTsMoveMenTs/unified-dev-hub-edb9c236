@@ -15,6 +15,7 @@ import {
   Server,
   Zap,
   Layers,
+  Network,
 } from "lucide-react";
 
 export type NavSection = {
