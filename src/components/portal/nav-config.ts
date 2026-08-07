@@ -38,6 +38,17 @@ export const navSections: NavSection[] = [
     ],
   },
   {
+    to: "/canvas",
+    label: "Infinite Canvas",
+    icon: Network,
+    focus: "Unendliche Node-Fläche: Partner, Connectoren und Pipelines räumlich verdrahten.",
+    sub: [
+      { label: "Node-Feld", icon: Network, hash: "feld", description: "Pan, Zoom, Snap" },
+      { label: "Verbindungen", icon: GitBranch, hash: "links", description: "Energie-Fluss" },
+      { label: "Timeline", icon: Zap, hash: "timeline", description: "Event-Marker" },
+    ],
+  },
+  {
     to: "/start",
     label: "Get Started",
     icon: Zap,
