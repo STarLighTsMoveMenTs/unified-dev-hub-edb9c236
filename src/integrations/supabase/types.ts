@@ -91,6 +91,62 @@ export type Database = {
           },
         ]
       }
+      canvas_nodes: {
+        Row: {
+          catalog_item_id: string | null
+          created_at: string
+          id: string
+          links: string[]
+          node_type: string
+          note: string
+          pos_x: number
+          pos_y: number
+          status: string
+          tier: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          catalog_item_id?: string | null
+          created_at?: string
+          id?: string
+          links?: string[]
+          node_type?: string
+          note?: string
+          pos_x?: number
+          pos_y?: number
+          status?: string
+          tier?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          catalog_item_id?: string | null
+          created_at?: string
+          id?: string
+          links?: string[]
+          node_type?: string
+          note?: string
+          pos_x?: number
+          pos_y?: number
+          status?: string
+          tier?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "canvas_nodes_catalog_item_id_fkey"
+            columns: ["catalog_item_id"]
+            isOneToOne: false
+            referencedRelation: "catalog_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       catalog_items: {
         Row: {
           category: string
@@ -284,6 +340,36 @@ export type Database = {
           id?: string
           provider?: string
           url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      timeline_events: {
+        Row: {
+          created_at: string
+          detail: string
+          id: string
+          label: string
+          phase: string
+          severity: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string
+          id?: string
+          label: string
+          phase?: string
+          severity?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string
+          id?: string
+          label?: string
+          phase?: string
+          severity?: string
           user_id?: string
         }
         Relationships: []

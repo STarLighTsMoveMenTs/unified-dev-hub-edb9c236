@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, Container, ShieldCheck, Terminal, Zap } from "lucide-react";
 import { TopBar } from "@/components/portal/top-bar";
+import { BlueprintBackground } from "@/components/portal/blueprint-background";
 import { CodeBlock } from "@/components/portal/code-block";
 import { Button } from "@/components/ui/button";
 import { bootstrapperScript, navSections } from "@/components/portal/nav-config";
@@ -27,31 +28,32 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-screen font-sans text-foreground">
+      <BlueprintBackground />
       <TopBar />
       <main>
         <section className="border-b border-border px-4 py-16 lg:px-8">
           <div className="mx-auto max-w-5xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary">
-              <Zap className="h-3 w-3" /> One-Click Control Plane
+            <span className="glass-panel prism-edge inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary">
+              <Zap className="h-3 w-3" /> Titanium One-Click Control Plane
             </span>
             <h1 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">
               Eine Oberfläche für den ganzen Lifecycle — von der Recherche bis zum
-              <span className="text-primary"> Live-Deployment</span>.
+              <span className="text-alloy"> Live-Deployment</span>.
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               Verifizierte SDKs, fertige Docker-Templates, ein nativer MCP-Katalog für KI-Agenten,
               automatisierte ISV-Zertifizierung mit einbettbaren Badges und Deployments in einem
-              Klick. Komplexität bleibt hinter dem Interface.
+              Klick — verdrahtet auf einer unendlichen Node-Canvas.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button asChild className="gap-1.5 font-mono text-xs">
+              <Button asChild className="glass-click gap-1.5 font-mono text-xs">
                 <Link to="/auth">
                   In 30 Sekunden starten <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="font-mono text-xs">
+              <Button asChild variant="outline" className="glass-click font-mono text-xs">
                 <Link to="/entdecken">Ökosystem durchsuchen</Link>
               </Button>
             </div>
@@ -60,18 +62,20 @@ function Landing() {
               <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 Universal Bootstrapper
               </p>
-              <CodeBlock label="bash" code={bootstrapperScript} />
+              <div className="glass-panel prism-edge specular-sweep overflow-hidden">
+                <CodeBlock label="bash" code={bootstrapperScript} />
+              </div>
             </div>
           </div>
         </section>
 
         <section className="px-4 py-12 lg:px-8">
-          <div className="mx-auto grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mx-auto grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-6">
             {navSections.map((section) => (
               <Link
                 key={section.to}
                 to={section.to}
-                className="group rounded-md border border-border bg-card p-4 transition-colors hover:border-primary/50"
+                className="glass-panel prism-edge tilt-3d neon-trace group p-4"
               >
                 <section.icon className="h-4 w-4 text-primary" />
                 <h3 className="mt-3 font-mono text-xs font-semibold">{section.label}</h3>

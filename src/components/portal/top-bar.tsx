@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Search, ShieldCheck, ChevronDown, LogOut, User as UserIcon, Activity } from "lucide-react";
+import {
+  Search,
+  ShieldCheck,
+  ChevronDown,
+  LogOut,
+  User as UserIcon,
+  Activity,
+  Sparkles,
+  Network,
+} from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -22,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-session";
 import { navSections } from "./nav-config";
+import { useMotionLevel, motionLabels } from "@/hooks/use-motion-level";
 import { cn } from "@/lib/utils";
 
 export function TopBar() {
@@ -29,6 +39,7 @@ export function TopBar() {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { user } = useSession();
+  const { level, cycle } = useMotionLevel();
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -83,11 +94,11 @@ export function TopBar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
+    <header className="glass-bar sticky top-0 z-40 border-b border-border">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2.5 lg:grid-cols-[auto_minmax(0,1fr)_auto]">
         <div className="flex min-w-0 items-center gap-3">
           <Link to="/" className="flex shrink-0 items-center gap-2">
-            <div className="grid h-7 w-7 shrink-0 place-items-center rounded bg-primary font-mono text-sm font-bold text-primary-foreground">
+            <div className="alloy-silver specular-sweep grid h-7 w-7 shrink-0 place-items-center rounded font-mono text-sm font-bold">
               1C
             </div>
             <span className="hidden font-mono text-sm font-semibold tracking-tight sm:inline">
@@ -95,7 +106,7 @@ export function TopBar() {
             </span>
           </Link>
           <span className="hidden items-center gap-1.5 rounded-full border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground md:inline-flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            <span className="dot-live" />
             Alle Systeme betriebsbereit
           </span>
         </div>
@@ -104,7 +115,7 @@ export function TopBar() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="flex w-full max-w-md items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 text-left text-sm text-muted-foreground transition-colors hover:border-primary/50"
+            className="glass-panel prism-edge flex w-full max-w-md items-center gap-2 px-3 py-1.5 text-left text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <Search className="h-3.5 w-3.5 shrink-0" />
             <span className="min-w-0 flex-1 truncate">SDKs, APIs, MCP-Server, Docker-Images …</span>
@@ -123,15 +134,24 @@ export function TopBar() {
           >
             <Search className="h-4 w-4" />
           </button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={cycle}
+            title="Animationsstufe umschalten"
+            className="glass-click hidden gap-1.5 font-mono text-[10px] md:inline-flex"
+          >
+            <Sparkles className="h-3 w-3 text-primary" /> {motionLabels[level]}
+          </Button>
           {badge ? (
-            <span className="hidden items-center gap-1.5 rounded-md border border-success/40 bg-success/10 px-2 py-1 font-mono text-[10px] text-success sm:inline-flex">
+            <span className="stamp-in hidden items-center gap-1.5 rounded-md border border-success/40 bg-success/10 px-2 py-1 font-mono text-[10px] text-success sm:inline-flex">
               <ShieldCheck className="h-3 w-3" /> {badge.label}
             </span>
           ) : null}
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="gap-1.5 font-mono text-xs">
+                <Button variant="outline" size="sm" className="glass-click gap-1.5 font-mono text-xs">
                   <span className="grid h-4 w-4 place-items-center rounded-sm bg-primary/20 text-[9px] text-primary">
                     {(user.email ?? "?").slice(0, 1).toUpperCase()}
                   </span>
@@ -144,6 +164,11 @@ export function TopBar() {
                   Workspace: default
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/canvas" className="gap-2">
+                    <Network className="h-3.5 w-3.5" /> Infinite Canvas
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/developer" className="gap-2">
                     <UserIcon className="h-3.5 w-3.5" /> Developer Hub
@@ -161,7 +186,7 @@ export function TopBar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild size="sm" className="font-mono text-xs">
+            <Button asChild size="sm" className="glass-click font-mono text-xs">
               <Link to="/auth">Anmelden</Link>
             </Button>
           )}
@@ -176,9 +201,9 @@ export function TopBar() {
               key={section.to}
               to={section.to}
               className={cn(
-                "flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-xs transition-colors",
+                "glass-click flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-xs transition-colors",
                 active
-                  ? "bg-primary/15 text-primary"
+                  ? "bg-primary/15 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--vivid)_45%,transparent)]"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
             >

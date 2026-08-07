@@ -15,6 +15,7 @@ import {
   Server,
   Zap,
   Layers,
+  Network,
 } from "lucide-react";
 
 export type NavSection = {
@@ -35,6 +36,17 @@ export const navSections: NavSection[] = [
       { label: "Kategorien", icon: Layers, hash: "kategorien", description: "Nach Bereich filtern" },
       { label: "Ecosystem Directory", icon: Boxes, hash: "verzeichnis", description: "Alle Einträge" },
       { label: "Tech-Stack-Suche", icon: Terminal, hash: "suche", description: "Nach Stack filtern" },
+    ],
+  },
+  {
+    to: "/canvas",
+    label: "Infinite Canvas",
+    icon: Network,
+    focus: "Unendliche Node-Fläche: Partner, Connectoren und Pipelines räumlich verdrahten.",
+    sub: [
+      { label: "Node-Feld", icon: Network, hash: "feld", description: "Pan, Zoom, Snap" },
+      { label: "Verbindungen", icon: GitBranch, hash: "links", description: "Energie-Fluss" },
+      { label: "Timeline", icon: Zap, hash: "timeline", description: "Event-Marker" },
     ],
   },
   {
