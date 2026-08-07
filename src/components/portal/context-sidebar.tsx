@@ -8,12 +8,14 @@ export function ContextSidebar() {
 
 
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar lg:block">
+    <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar/70 backdrop-blur-xl lg:block">
       <div className="sticky top-[104px] p-4">
         <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
           Kontext
         </p>
-        <h2 className="mt-1 text-sm font-semibold text-sidebar-foreground">{section.label}</h2>
+        <h2 className="iris-in mt-1 text-sm font-semibold text-sidebar-foreground">
+          {section.label}
+        </h2>
         <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{section.focus}</p>
 
         <nav className="mt-5 space-y-1">
@@ -21,7 +23,7 @@ export function ContextSidebar() {
             <a
               key={item.label}
               href={`#${item.hash}`}
-              className="flex items-start gap-2.5 rounded-md px-2 py-2 text-sidebar-foreground transition-colors hover:bg-sidebar-accent"
+              className="glass-click flex items-start gap-2.5 rounded-md px-2 py-2 text-sidebar-foreground transition-colors hover:bg-sidebar-accent"
             >
               <item.icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
               <span className="min-w-0">
@@ -34,7 +36,7 @@ export function ContextSidebar() {
           ))}
         </nav>
 
-        <div className="mt-6 rounded-md border border-sidebar-border bg-card p-3">
+        <div className="glass-panel prism-edge mt-6 p-3">
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
             Weitere Bereiche
           </p>
