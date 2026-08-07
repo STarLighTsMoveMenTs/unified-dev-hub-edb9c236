@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, Container, ShieldCheck, Terminal, Zap } from "lucide-react";
 import { TopBar } from "@/components/portal/top-bar";
+import { BlueprintBackground } from "@/components/portal/blueprint-background";
 import { CodeBlock } from "@/components/portal/code-block";
 import { Button } from "@/components/ui/button";
 import { bootstrapperScript, navSections } from "@/components/portal/nav-config";
