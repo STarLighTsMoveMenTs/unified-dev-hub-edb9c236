@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as EntdeckenRouteImport } from './routes/entdecken'
 import { Route as StartRouteImport } from './routes/start'
+import { Route as AuthenticatedCanvasRouteImport } from './routes/_authenticated/canvas'
 import { Route as AuthenticatedDeployRouteImport } from './routes/_authenticated/deploy'
 import { Route as AuthenticatedDeveloperRouteImport } from './routes/_authenticated/developer'
 import { Route as AuthenticatedPartnerRouteImport } from './routes/_authenticated/partner'
@@ -42,6 +43,11 @@ const StartRoute = StartRouteImport.update({
   path: '/start',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCanvasRoute = AuthenticatedCanvasRouteImport.update({
+  id: '/canvas',
+  path: '/canvas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDeployRoute = AuthenticatedDeployRouteImport.update({
   id: '/deploy',
   path: '/deploy',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/canvas': typeof AuthenticatedCanvasRoute
   '/deploy': typeof AuthenticatedDeployRoute
   '/developer': typeof AuthenticatedDeveloperRoute
   '/partner': typeof AuthenticatedPartnerRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/canvas': typeof AuthenticatedCanvasRoute
   '/deploy': typeof AuthenticatedDeployRoute
   '/developer': typeof AuthenticatedDeveloperRoute
   '/partner': typeof AuthenticatedPartnerRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/entdecken': typeof EntdeckenRoute
   '/start': typeof StartRoute
+  '/_authenticated/canvas': typeof AuthenticatedCanvasRoute
   '/_authenticated/deploy': typeof AuthenticatedDeployRoute
   '/_authenticated/developer': typeof AuthenticatedDeveloperRoute
   '/_authenticated/partner': typeof AuthenticatedPartnerRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/entdecken'
     | '/start'
+    | '/canvas'
     | '/deploy'
     | '/developer'
     | '/partner'
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/entdecken'
     | '/start'
+    | '/canvas'
     | '/deploy'
     | '/developer'
     | '/partner'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/entdecken'
     | '/start'
+    | '/_authenticated/canvas'
     | '/_authenticated/deploy'
     | '/_authenticated/developer'
     | '/_authenticated/partner'
@@ -163,6 +175,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/canvas': {
+      id: '/_authenticated/canvas'
+      path: '/canvas'
+      fullPath: '/canvas'
+      preLoaderRoute: typeof AuthenticatedCanvasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/deploy': {
       id: '/_authenticated/deploy'
       path: '/deploy'
@@ -188,12 +207,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCanvasRoute: typeof AuthenticatedCanvasRoute
   AuthenticatedDeployRoute: typeof AuthenticatedDeployRoute
   AuthenticatedDeveloperRoute: typeof AuthenticatedDeveloperRoute
   AuthenticatedPartnerRoute: typeof AuthenticatedPartnerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCanvasRoute: AuthenticatedCanvasRoute,
   AuthenticatedDeployRoute: AuthenticatedDeployRoute,
   AuthenticatedDeveloperRoute: AuthenticatedDeveloperRoute,
   AuthenticatedPartnerRoute: AuthenticatedPartnerRoute,
@@ -212,13 +233,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
