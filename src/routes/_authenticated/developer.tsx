@@ -16,6 +16,8 @@ import { Badge } from "@/components/ui/badge";
 export const Route = createFileRoute("/_authenticated/developer")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Developer Hub — API-Keys, SDKs & MCP" },
       {
         name: "description",

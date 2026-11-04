@@ -5,6 +5,8 @@ import { NodeCanvas } from "@/components/portal/node-canvas";
 export const Route = createFileRoute("/_authenticated/canvas")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Infinite Node Canvas — oneclick.platform" },
       {
         name: "description",

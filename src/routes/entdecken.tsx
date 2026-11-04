@@ -16,6 +16,8 @@ export const Route = createFileRoute("/entdecken")({
   validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Discover & Research — Ökosystem-Katalog" },
       {
         name: "description",
