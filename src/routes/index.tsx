@@ -9,6 +9,8 @@ import { bootstrapperScript, navSections } from "@/components/portal/nav-config"
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "oneclick.platform — Developer & Partner Control Plane" },
       {
         name: "description",

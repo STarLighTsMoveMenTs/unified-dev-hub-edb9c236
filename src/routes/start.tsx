@@ -11,6 +11,8 @@ import { bootstrapperScript } from "@/components/portal/nav-config";
 export const Route = createFileRoute("/start")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Get Started — One-Click Setup" },
       {
         name: "description",

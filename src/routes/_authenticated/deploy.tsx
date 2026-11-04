@@ -15,6 +15,8 @@ import { Badge } from "@/components/ui/badge";
 export const Route = createFileRoute("/_authenticated/deploy")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Code & Deploy — Repositories & Rollouts" },
       {
         name: "description",
